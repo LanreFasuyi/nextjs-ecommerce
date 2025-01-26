@@ -1,10 +1,10 @@
 "use client";
 import { createClient, OAuthStrategy } from "@wix/sdk";
-import { products } from "@wix/stores";
+import { products, collections } from "@wix/stores";
+import { currentCart } from "@wix/ecom";
 import Cookies from "js-cookie";
 import { createContext, ReactNode } from "react";
 
-import { members } from "@wix/members";
 type RefreshToken = {
   value: string;
   role: any;
@@ -15,7 +15,7 @@ const refreshToken: RefreshToken | null = Cookies.get("refreshToken")
   : {};
 
 const myWixClient = createClient({
-  modules: { products },
+  modules: { products, collections, currentCart },
   auth: OAuthStrategy({
     clientId: process.env.NEXT_PUBLIC_WIX_CLIENT_SECRET || "",
     tokens: {
